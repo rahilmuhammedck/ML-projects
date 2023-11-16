@@ -6,11 +6,23 @@ from sklearn.metrics import mean_absolute_error
 
 #importing the data
 
-train = pd.read_csv(r"C:\Users\USER\Downloads\train.csv")
-test = pd.read_csv(r"C:\Users\USER\Downloads\test.csv")
+train_data = pd.read_csv("train.csv")
 
-#feature selection
+y = train_data.SalePrice
 
-y = train.SalePrice
+features = ["LotArea","YearBuilt"]
 
-feautures = ["LotArea","YearBuilt","1stFlrSF","2ndFlrSF","FullBath","BedroomAbvGr","TotRmsAbvGrd"]
+X = train_data[features]
+
+
+#spliting the data to test and train
+
+train_X ,test_X, train_y, test_y = train_test_split(X, y, random_state=1)
+
+rf_model = RandomForestRegressor(random_state=1)
+
+rf_model.fit(train_X, train_y)
+rf_val_predictions = rf_model.predict(test_X)
+rf_val_mae = mean_absolute_error(rf_val_predictions, test_y)
+
+print(" MAE for Random Forest Model: {:,.0f}".format(rf_val_mae))
