@@ -3,5 +3,5 @@ ML models
 Linear regression
 Random Forest
 Decision Tree
-K neighbors
+K neighbor
 
